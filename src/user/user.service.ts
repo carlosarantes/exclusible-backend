@@ -34,6 +34,10 @@ export class UserService {
   }
 
   async findByEmail(email: string): Promise<unknown> {
-    return await this.usersModel.findOne({ email }).exec();
+    try {
+      return await this.usersModel.findOne({ email }).exec();
+    } catch (error) {
+      return null;
+    }
   }
 }
