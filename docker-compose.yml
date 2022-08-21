@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  app:
+    image: node
+    working_dir: /home/node/app
+    depends_on:
+      - db
+    command: "npm run start:debug"
+    ports:
+      - 3001:3001
+      - 9229:9229
+    tty: true
+    networks:
+      - webnet
+    volumes:
+      - .:/home/node/app
+
+  db:
+    image: mongo
+    container_name: mongodb2
+    hostname: mongodb2
+    restart: always
+    networks:
+      - webnet
+    environment:
+      - MONGO_INITDB_DATABASE=exclusible
+      - MONGO_INITDB_ROOT_USERNAME=carlos
+      - MONGO_INITDB_ROOT_PASSWORD=10203040
+    expose:
+      - '27017'
+    # ports:
+    #  - 27401:27017
+    volumes:
+      - ./.docker/dbdata:/data/db
+
+networks:
+  webnet:
+    driver: bridge
