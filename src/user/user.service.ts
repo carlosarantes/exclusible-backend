@@ -1,11 +1,9 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 
-import { AuthUserDto, CreateUserDto } from './user.dto';
-
-import { hashSync } from 'bcrypt';
 import { Repository } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUserDto } from './dtos';
 
 @Injectable()
 export class UserService {
