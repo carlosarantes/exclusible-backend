@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from 'src/strategies/jwt.strategy';
@@ -9,10 +10,11 @@ import { AuthService } from './auth.service';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     UserModule,
     PassportModule,
     JwtModule.register({
-      privateKey: 'IVVBjIvKMrCaW6i2eb1lJAYm6sWkLTjgC8Om/czevjs=',
+      privateKey: process.env.JWT_SECRET_KEY,
       signOptions: { expiresIn: '120s' },
     }),
   ],

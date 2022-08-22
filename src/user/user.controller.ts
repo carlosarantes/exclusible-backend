@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Post,
   UseGuards,
@@ -33,6 +35,7 @@ export class UserController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   @UseGuards(AuthGuard('jwt'))
   async deleteUser(@Param('id') id: string): Promise<unknown> {
     return this.userService.deleteUser(id);

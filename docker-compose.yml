@@ -6,34 +6,22 @@ services:
     working_dir: /home/node/app
     depends_on:
       - db
+    links:
+      - db
     command: "npm run start:debug"
     ports:
       - 3001:3001
       - 9229:9229
     tty: true
-    networks:
-      - webnet
     volumes:
       - .:/home/node/app
 
   db:
-    image: mongo
-    container_name: mongodb2
-    hostname: mongodb2
-    restart: always
-    networks:
-      - webnet
+    image: mysql:5.7
+    container_name: mysqldb
+    restart: unless-stopped
+    ports:
+      - 3306:3306    
     environment:
-      - MONGO_INITDB_DATABASE=exclusible
-      - MONGO_INITDB_ROOT_USERNAME=carlos
-      - MONGO_INITDB_ROOT_PASSWORD=10203040
-    expose:
-      - '27017'
-    # ports:
-    #  - 27401:27017
-    volumes:
-      - ./.docker/dbdata:/data/db
-
-networks:
-  webnet:
-    driver: bridge
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=exclusible
