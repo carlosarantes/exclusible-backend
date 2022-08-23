@@ -3,6 +3,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { ExchangeModule } from './exchange/exchange.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
     } as TypeOrmModuleOptions),
     UserModule,
     AuthModule,
+    ExchangeModule,
   ],
   controllers: [],
   providers: [],

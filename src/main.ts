@@ -10,6 +10,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Exclusible API v1')
     .setDescription('This is a base DEMO code chanllenge API to Exclusible.')
+    .addBearerAuth()
     .setVersion('1.0')
     .addTag('users')
     .addTag('auth')
