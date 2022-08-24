@@ -15,6 +15,9 @@ services:
     tty: true
     volumes:
       - .:/home/node/app
+    networks:
+      vpcbr:
+        ipv4_address: 172.44.9.3
 
   db:
     image: mysql:5.7
@@ -25,3 +28,12 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=admin
       - MYSQL_DATABASE=exclusible
+    networks:
+      vpcbr:
+        ipv4_address: 172.44.9.4
+
+networks:
+  vpcbr:
+    ipam:
+      config:
+        - subnet: 172.44.9.0/24
